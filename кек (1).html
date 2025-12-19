@@ -1,0 +1,2468 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дачный Рай - Магазин оборудования для дачи</title>
+    <link rel="stylesheet" href="https://97.img.avito.st/640x480/11461377897.jpg" />
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Шапка */
+        header {
+            background-color: #2d5a27;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: #8bc34a;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #8bc34a;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover {
+            color: #8bc34a;
+        }
+        
+        .user-actions a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1rem;
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .user-actions a.login-btn {
+            background-color: #8bc34a;
+        }
+        
+        .user-actions a.login-btn:hover {
+            background-color: #689f38;
+        }
+        
+        .user-actions a i {
+            margin-right: 0.3rem;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Модальные окна */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            background-color: #2d5a27;
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            font-size: 1.5rem;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .modal-body {
+            padding: 2rem 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #8bc34a;
+            box-shadow: 0 0 0 2px rgba(139, 195, 74, 0.2);
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 0.5rem;
+        }
+        
+        .forgot-password {
+            color: #2d5a27;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .modal-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .modal-footer a {
+            color: #2d5a27;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .modal-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Переключение между формами */
+        .form-switch {
+            text-align: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .password-requirements {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        /* Профиль пользователя */
+        .user-profile {
+            display: none;
+            align-items: center;
+        }
+        
+        .user-profile.active {
+            display: flex;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+        }
+        
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #8bc34a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .logout-btn {
+            background-color: #e53935;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background-color: #c62828;
+        }
+        
+        /* Главная страница */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://avatars.mds.yandex.net/i?id=23a07beba6b74d118e067dd5e73dec3c_l-4884390-images-thumbs&n=13');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #8bc34a;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #689f38;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #8bc34a;
+            color: #8bc34a;
+        }
+        
+        .btn-outline:hover {
+            background-color: #8bc34a;
+            color: white;
+        }
+        
+        .categories {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            color: #2d5a27;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #8bc34a;
+            margin: 0.5rem auto;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .category-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .category-card h3 {
+            padding: 1rem;
+            text-align: center;
+            color: #2d5a27;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: #2d5a27;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            color: #8bc34a;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #8bc34a;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Страница каталога */
+        .catalog-header {
+            padding: 2rem 0;
+            background-color: #e8f5e9;
+        }
+        
+        .catalog-filters {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+        
+        .filter-group select, .filter-group input {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 1rem;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            color: #2d5a27;
+        }
+        
+        .product-price {
+            font-weight: bold;
+            color: #e53935;
+            margin-bottom: 1rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /* Страница товара */
+        .product-detail {
+            padding: 3rem 0;
+        }
+        
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .product-gallery img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        
+        .product-details h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #2d5a27;
+        }
+        
+        .product-price-large {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e53935;
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-description {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .product-options {
+            margin-bottom: 2rem;
+        }
+        
+        .option-group {
+            margin-bottom: 1rem;
+        }
+        
+        .option-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .option-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .add-to-cart {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .quantity {
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+        }
+        
+        .quantity button {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .quantity input {
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+        }
+        
+        /* Корзина */
+        .cart-container {
+            padding: 3rem 0;
+        }
+        
+        .cart-items {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto auto auto;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item img {
+            width: 100%;
+            border-radius: 4px;
+        }
+        
+        .cart-item-details h3 {
+            margin-bottom: 0.5rem;
+            color: #2d5a27;
+        }
+        
+        .cart-item-price {
+            font-weight: bold;
+            color: #e53935;
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+        
+        .cart-item-quantity input {
+            width: 50px;
+            text-align: center;
+            margin: 0 0.5rem;
+        }
+        
+        .cart-summary {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .summary-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+        
+        /* Контакты */
+        .contacts-container {
+            padding: 3rem 0;
+        }
+        
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-info h2 {
+            margin-bottom: 1.5rem;
+            color: #2d5a27;
+        }
+        
+        .contact-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-item h3 {
+            margin-bottom: 0.5rem;
+            color: #2d5a27;
+        }
+        
+        .map-container {
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        
+        /* Страница "О нас" */
+        .about-container {
+            padding: 3rem 0;
+        }
+        
+        .about-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            line-height: 1.8;
+        }
+        
+        .about-content h2 {
+            color: #2d5a27;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-content h3 {
+            color: #2d5a27;
+            margin: 2rem 0 1rem;
+        }
+        
+        .about-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .about-content ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Страница "Доставка и оплата" */
+        .delivery-container {
+            padding: 3rem 0;
+        }
+        
+        .delivery-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            line-height: 1.8;
+        }
+        
+        .delivery-methods, .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .method-card {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #8bc34a;
+        }
+        
+        .method-card h3 {
+            color: #2d5a27;
+            margin-bottom: 1rem;
+        }
+        
+        /* Страница "Гарантия" */
+        .warranty-container {
+            padding: 3rem 0;
+        }
+        
+        .warranty-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            line-height: 1.8;
+        }
+        
+        .warranty-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .step-card {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .step-number {
+            background-color: #8bc34a;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-weight: bold;
+        }
+        
+        /* Страница FAQ */
+        .faq-container {
+            padding: 3rem 0;
+        }
+        
+        .faq-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1.5rem;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            color: #2d5a27;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: #8bc34a;
+        }
+        
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+        
+        .faq-answer {
+            display: none;
+            padding-top: 0.5rem;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        /* Страница "Возврат товара" */
+        .returns-container {
+            padding: 3rem 0;
+        }
+        
+        .returns-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            line-height: 1.8;
+        }
+        
+        .returns-conditions {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #e53935;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .user-actions {
+                margin-top: 1rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .product-container, .contacts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+                grid-template-rows: auto auto auto;
+            }
+            
+            .cart-item-price, .cart-item-quantity, .cart-item-remove {
+                grid-column: 2;
+            }
+            
+            .delivery-methods, .payment-methods, .warranty-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+                width: 100%;
+                margin-top: 1rem;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .user-actions {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .user-actions a {
+                margin: 0.5rem;
+            }
+        }
+        
+        /* Страницы */
+        .page {
+            display: none;
+            min-height: 60vh;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        /* Утилиты */
+        .no-products, .cart-empty {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+            font-size: 1.2rem;
+        }
+        
+        .btn-remove {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .btn-remove:hover {
+            background-color: #d32f2f;
+        }
+        
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .btn-clear-cart {
+            background-color: #f44336;
+        }
+        
+        .btn-clear-cart:hover {
+            background-color: #d32f2f;
+        }
+        
+        .btn-checkout {
+            background-color: #2d5a27;
+        }
+        
+        .btn-checkout:hover {
+            background-color: #1b3e16;
+        }
+        
+        /* Сообщения об ошибках */
+        .error-message {
+            color: #f44336;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        .form-group.error input {
+            border-color: #f44336;
+        }
+        
+        .form-group.success input {
+            border-color: #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Дачный <span>Рай</span></div>
+            <div class="mobile-menu">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="nav-link active">Главная</a></li>
+                    <li><a href="#catalog" class="nav-link">Каталог</a></li>
+                    <li><a href="#about" class="nav-link">О нас</a></li>
+                    <li><a href="#contacts" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <a href="#cart" class="nav-link" id="cart-link">🛒 Корзина (<span id="cart-count">0</span>)</a>
+                <div class="user-profile" id="user-profile">
+                    <div class="user-info">
+                        <div class="user-avatar" id="user-avatar">П</div>
+                        <span id="user-name">Пользователь</span>
+                    </div>
+                    <button class="logout-btn" id="logout-btn">Выйти</button>
+                </div>
+                <a href="#login" class="nav-link login-btn" id="login-btn">👤 Войти</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Модальное окно входа -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Вход в систему</h2>
+                <button class="close-modal" id="close-login-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="Введите ваш email" required>
+                        <div class="error-message" id="login-email-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Пароль</label>
+                        <input type="password" id="login-password" placeholder="Введите ваш пароль" required>
+                        <div class="error-message" id="login-password-error"></div>
+                    </div>
+                    <div class="form-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Запомнить меня</label>
+                        </div>
+                        <a href="#forgot-password" class="forgot-password">Забыли пароль?</a>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Войти</button>
+                </form>
+                <div class="modal-footer">
+                    <p>Ещё нет аккаунта? <a href="#" id="switch-to-register">Зарегистрироваться</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно регистрации -->
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Регистрация</h2>
+                <button class="close-modal" id="close-register-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="register-name">Имя</label>
+                        <input type="text" id="register-name" placeholder="Введите ваше имя" required>
+                        <div class="error-message" id="register-name-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" placeholder="Введите ваш email" required>
+                        <div class="error-message" id="register-email-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Пароль</label>
+                        <input type="password" id="register-password" placeholder="Введите пароль" required>
+                        <div class="password-requirements">Пароль должен содержать минимум 6 символов</div>
+                        <div class="error-message" id="register-password-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm-password">Подтвердите пароль</label>
+                        <input type="password" id="register-confirm-password" placeholder="Повторите пароль" required>
+                        <div class="error-message" id="register-confirm-password-error"></div>
+                    </div>
+                    <div class="form-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="agree-terms" required>
+                            <label for="agree-terms">Я согласен с условиями использования</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Зарегистрироваться</button>
+                </form>
+                <div class="modal-footer">
+                    <p>Уже есть аккаунт? <a href="#" id="switch-to-login">Войти</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Главная страница -->
+    <section id="home" class="page active fade-in">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Всё для вашего идеального дачного участка</h1>
+                <p>Широкий ассортимент качественного оборудования и инструментов для сада и огорода</p>
+                <a href="#catalog" class="btn nav-link">Перейти в каталог</a>
+            </div>
+        </div>
+        
+        <section class="categories">
+            <div class="container">
+                <h2 class="section-title">Категории товаров</h2>
+                <div class="category-grid">
+                    <div class="category-card" data-category="gardening">
+                        <img src="https://svoevse.ru/api/v1/vsesvoe/media-manager/storage/app/media/uploaded-files/1741938859-1275bac2-b28d-4311-a938-b2655c9ba859.jpeg" alt="Садовый инвентарь">
+                        <h3>Садовый инвентарь</h3>
+                    </div>
+                    <div class="category-card" data-category="watering">
+                        <img src="https://ir-3.ozone.ru/s3/multimedia-1-h/w1200/7114594733.jpg" alt="Полив и орошение">
+                        <h3>Полив и орошение</h3>
+                    </div>
+                    <div class="category-card" data-category="greenhouses">
+                        <img src="https://teplitsa-store.ru/image/catalog/teplitsi-real-photo/3d9a4e257f2f0b0a7abd98cca23fbd24.jpg" alt="Теплицы и парники">
+                        <h3>Теплицы и парники</h3>
+                    </div>
+                    <div class="category-card" data-category="tools">
+                        <img src="https://sadnazakaz.ru/images/inventar.jpg" alt="Садовые инструменты">
+                        <h3>Садовые инструменты</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Страница каталога -->
+    <section id="catalog" class="page">
+        <div class="catalog-header">
+            <div class="container">
+                <h1 class="section-title">Каталог товаров</h1>
+                <div class="catalog-filters">
+                    <div class="filter-group">
+                        <label for="category-filter">Категория:</label>
+                        <select id="category-filter">
+                            <option value="all">Все категории</option>
+                            <option value="gardening">Садовый инвентарь</option>
+                            <option value="watering">Полив и орошение</option>
+                            <option value="greenhouses">Теплицы и парники</option>
+                            <option value="tools">Садовые инструменты</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="price-filter">Цена:</label>
+                        <select id="price-filter">
+                            <option value="all">Любая</option>
+                            <option value="low">До 5000 руб.</option>
+                            <option value="medium">5000 - 15000 руб.</option>
+                            <option value="high">Свыше 15000 руб.</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="search">Поиск:</label>
+                        <input type="text" id="search" placeholder="Введите название товара">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="products-grid" id="products-container">
+                <!-- Товары будут загружены через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Страница "О нас" -->
+    <section id="about" class="page">
+        <div class="about-container">
+            <div class="container">
+                <h1 class="section-title">О нас</h1>
+                <div class="about-content">
+                    <h2>Дачный Рай - ваш надежный партнер в мире садоводства</h2>
+                    <p>Мы занимаемся поставками качественного садового оборудования и инструментов уже более 10 лет. Наша миссия - сделать ваш дачный участок местом, где можно не только работать, но и отдыхать с удовольствием.</p>
+                    
+                    <h3>Наша история</h3>
+                    <p>Все началось в 2013 году с небольшого магазина в Нальчике. Основатель компании, Иван Петров, будучи заядлым садоводом, заметил, что на рынке не хватает качественного и доступного садового инвентаря. Так появился "Дачный Рай".</p>
+                    
+                    <h3>Наши ценности</h3>
+                    <ul>
+                        <li><strong>Качество:</strong> Мы тщательно отбираем каждого поставщика и проверяем каждую единицу товара</li>
+                        <li><strong>Доступность:</strong> Стремимся сделать качественные товары доступными каждому</li>
+                        <li><strong>Экспертиза:</strong> Наши консультанты - опытные садоводы, готовые помочь советом</li>
+                        <li><strong>Надежность:</strong> Гарантия на все товары и честные условия возврата</li>
+                    </ul>
+                    
+                    <h3>Почему выбирают нас?</h3>
+                    <p>Сегодня "Дачный Рай" - это не просто магазин, а сообщество единомышленников. Мы проводим мастер-классы, консультируем по вопросам садоводства и всегда рады помочь нашим клиентам.</p>
+                    
+                    <p>Присоединяйтесь к нашей большой семье садоводов-любителей и профессионалов!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Страница "Доставка и оплата" -->
+    <section id="delivery" class="page">
+        <div class="delivery-container">
+            <div class="container">
+                <h1 class="section-title">Доставка и оплата</h1>
+                <div class="delivery-content">
+                    <h2>Условия доставки</h2>
+                    <p>Мы предлагаем несколько удобных способов доставки по всей России. Вы можете выбрать тот, который подходит именно вам.</p>
+                    
+                    <div class="delivery-methods">
+                        <div class="method-card">
+                            <h3>Курьерская доставка</h3>
+                            <p><strong>Срок:</strong> 1-3 дня</p>
+                            <p><strong>Стоимость:</strong> от 300 руб.</p>
+                            <p>Доставка до двери в удобное для вас время</p>
+                        </div>
+                        
+                        <div class="method-card">
+                            <h3>Почта России</h3>
+                            <p><strong>Срок:</strong> 5-14 дней</p>
+                            <p><strong>Стоимость:</strong> от 200 руб.</p>
+                            <p>Доставка в ближайшее почтовое отделение</p>
+                        </div>
+                        
+                        <div class="method-card">
+                            <h3>Самовывоз</h3>
+                            <p><strong>Срок:</strong> В день заказа</p>
+                            <p><strong>Стоимость:</strong> Бесплатно</p>
+                            <p>Самовывоз из нашего магазина по адресу: г. Нальчик, ул.Орджоникидзе 172</p>
+                        </div>
+                    </div>
+                    
+                    <h2>Способы оплаты</h2>
+                    <p>Мы принимаем различные способы оплаты для вашего удобства.</p>
+                    
+                    <div class="payment-methods">
+                        <div class="method-card">
+                            <h3>Наличные</h3>
+                            <p>Оплата наличными при получении заказа (только для курьерской доставки и самовывоза)</p>
+                        </div>
+                        
+                        <div class="method-card">
+                            <h3>Банковская карта</h3>
+                            <p>Оплата онлайн банковской картой Visa, MasterCard, МИР</p>
+                        </div>
+                        
+                        <div class="method-card">
+                            <h3>Электронные кошельки</h3>
+                            <p>Оплата через ЮMoney, Qiwi и другие электронные платежные системы</p>
+                        </div>
+                    </div>
+                    
+                    <h2>Гарантии</h2>
+                    <p>Мы гарантируем сохранность ваших данных при оплате. Все платежи проходят через защищенные каналы связи.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Страница "Гарантия" -->
+    <section id="warranty" class="page">
+        <div class="warranty-container">
+            <div class="container">
+                <h1 class="section-title">Гарантия</h1>
+                <div class="warranty-content">
+                    <h2>Гарантийные обязательства</h2>
+                    <p>Мы предоставляем гарантию на все товары, приобретенные в нашем магазине. Гарантийный срок зависит от категории товара и указывается в гарантийном талоне.</p>
+                    
+                    <h3>Стандартные гарантийные сроки:</h3>
+                    <ul>
+                        <li><strong>Садовый инвентарь:</strong> 2 года</li>
+                        <li><strong>Инструменты:</strong> 1-3 года в зависимости от производителя</li>
+                        <li><strong>Теплицы и парники:</strong> 5 лет на каркас, 3 года на покрытие</li>
+                        <li><strong>Системы полива:</strong> 1 год</li>
+                    </ul>
+                    
+                    <h3>Что покрывается гарантией?</h3>
+                    <p>Гарантия покрывает производственные дефекты и неисправности, возникшие при нормальных условиях эксплуатации.</p>
+                    
+                    <h3>Как воспользоваться гарантией?</h3>
+                    <div class="warranty-steps">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <h4>Обращение</h4>
+                            <p>Свяжитесь с нами по телефону или email при обнаружении неисправности</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <h4>Диагностика</h4>
+                            <p>Наш специалист проведет диагностику для определения причины неисправности</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <h4>Решение</h4>
+                            <p>В зависимости от ситуации мы предложим ремонт, замену или возврат средств</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <h4>Исполнение</h4>
+                            <p>Мы выполним гарантийные обязательства в кратчайшие сроки</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Гарантия не распространяется на:</h3>
+                    <ul>
+                        <li>Повреждения, вызванные неправильной эксплуатацией</li>
+                        <li>Механические повреждения, полученные при небрежном обращении</li>
+                        <li>Естественный износ</li>
+                        <li>Повреждения, вызванные стихийными бедствиями</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Страница FAQ -->
+    <section id="faq" class="page">
+        <div class="faq-container">
+            <div class="container">
+                <h1 class="section-title">Часто задаваемые вопросы</h1>
+                <div class="faq-content">
+                    <div class="faq-item">
+                        <div class="faq-question">Как оформить заказ?</div>
+                        <div class="faq-answer">
+                            <p>Для оформления заказа добавьте нужные товары в корзину, перейдите в корзину, заполните контактные данные и выберите способ доставки и оплаты. После подтверждения заказа с вами свяжется менеджер для уточнения деталей.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">Как отследить статус заказа?</div>
+                        <div class="faq-answer">
+                            <p>После оформления заказа вам будет присвоен номер заказа. Вы можете отслеживать его статус по телефону +7 (992) 555-58-30 или написав на email msaoev@gmail.ru с указанием номера заказа.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">Можно ли изменить состав заказа после оформления?</div>
+                        <div class="faq-answer">
+                            <p>Да, вы можете изменить состав заказа до момента его передачи в службу доставки. Для этого свяжитесь с нами по телефону или email.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">Какой срок доставки?</div>
+                        <div class="faq-answer">
+                            <p>Срок доставка зависит от выбранного способа: курьерская доставка - 1-3 дня, почта России - 5-14 дней, самовывоз - в день заказа.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">Что делать, если товар не подошел?</div>
+                        <div class="faq-answer">
+                            <p>Вы можете вернуть товар в течение 14 дней с момента получения, если он не был в употреблении, сохранен товарный вид и упаковка. Подробнее в разделе "Возврат товара".</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">Предоставляете ли вы консультации по садоводству?</div>
+                        <div class="faq-answer">
+                            <p>Да, наши специалисты с радостью проконсультируют вас по вопросам выбора товаров и их использования. Звоните по телефону или пишите на email.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">Есть ли у вас скидки для постоянных клиентов?</div>
+                        <div class="faq-answer">
+                            <p>Да, у нас действует программа лояльности. При первой покупке вы получаете накопительную карту, которая дает скидку 5% на все последующие покупки.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Страница "Возврат товара" -->
+    <section id="returns" class="page">
+        <div class="returns-container">
+            <div class="container">
+                <h1 class="section-title">Возврат товара</h1>
+                <div class="returns-content">
+                    <h2>Условия возврата</h2>
+                    <p>Мы стремимся к тому, чтобы наши клиенты были полностью довольны покупками. Если по какой-то причине товар вам не подошел, вы можете вернуть его.</p>
+                    
+                    <div class="returns-conditions">
+                        <h3>Основные условия возврата:</h3>
+                        <ul>
+                            <li>Товар должен быть возвращен в течение 14 дней с момента получения</li>
+                            <li>Товар не должен иметь следов использования</li>
+                            <li>Сохранился товарный вид и потребительские свойства</li>
+                            <li>Присутствуют все ярлыки и заводская упаковка</li>
+                            <li>Имеется товарный или кассовый чек</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Товары, не подлежащие возврату:</h3>
+                    <ul>
+                        <li>Товары, изготовленные на заказ</li>
+                        <li>Скоропортящиеся товары</li>
+                        <li>Товары, утратившие товарный вид</li>
+                        <li>Электроинструменты, бывшие в употреблении</li>
+                    </ul>
+                    
+                    <h3>Процедура возврата:</h3>
+                    <ol>
+                        <li>Свяжитесь с нами по телефону или email для получения разрешения на возврат</li>
+                        <li>Подготовьте товар к возврату: упакуйте его в оригинальную упаковку</li>
+                        <li>Заполните заявление на возврат (форму вышлем по email)</li>
+                        <li>Отправьте товар нам или привезите в магазин по адресу: г. Нальчик, ул.Орджоникидзе 172</li>
+                        <li>После проверки товара мы вернем вам деньги в течение 10 рабочих дней</li>
+                    </ol>
+                    
+                    <h3>Возврат денежных средств</h3>
+                    <p>Деньги возвращаются тем же способом, которым была произведена оплата:</p>
+                    <ul>
+                        <li>Наличные - при возврате в магазине</li>
+                        <li>На банковскую карту - в течение 10 рабочих дней</li>
+                        <li>На электронный кошелек - в течение 3-5 рабочих дней</li>
+                    </ul>
+                    
+                    <p>Если у вас остались вопросы по возврату товара, свяжитесь с нами по телефону +7 (992) 555-58-30 или напишите на msaoev@gmail.ru.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Страница корзины -->
+    <section id="cart" class="page">
+        <div class="cart-container">
+            <div class="container">
+                <h1 class="section-title">Корзина</h1>
+                <div id="cart-content">
+                    <!-- Содержимое корзины будет загружено через JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Страница контактов -->
+    <section id="contacts" class="page">
+        <div class="contacts-container">
+            <div class="container">
+                <h1 class="section-title">Контакты</h1>
+                <div class="contacts-grid">
+                    <div class="contact-info">
+                        <h2>Наши контакты</h2>
+                        <div class="contact-item">
+                            <h3>Адрес</h3>
+                            <p>г. Нальчик, ул.Орджоникидзе 172</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>Телефон</h3>
+                            <p>+7 (992) 555-58-30</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>Email</h3>
+                            <p>msaoev@gmail.ru</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>Режим работы</h3>
+                            <p>Пн-Пт: 9:00-20:00<br>Сб-Вс: 10:00-18:00</p>
+                        </div>
+                        <a href="#catalog" class="btn nav-link">Перейти в каталог</a>
+                    </div>
+                    <div class="map-container">
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал сайта -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>О компании</h3>
+                    <ul>
+                        <li><a href="#about" class="nav-link">О нас</a></li>
+                        <li><a href="#delivery" class="nav-link">Доставка и оплата</a></li>
+                        <li><a href="#warranty" class="nav-link">Гарантия</a></li>
+                        <li><a href="#contacts" class="nav-link">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Каталог</h3>
+                    <ul>
+                        <li><a href="#catalog" data-category="gardening" class="category-link">Садовый инвентарь</a></li>
+                        <li><a href="#catalog" data-category="watering" class="category-link">Полив и орошение</a></li>
+                        <li><a href="#catalog" data-category="greenhouses" class="category-link">Теплицы и парники</a></li>
+                        <li><a href="#catalog" data-category="tools" class="category-link">Садовые инструменты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Помощь</h3>
+                    <ul>
+                        <li><a href="#faq" class="nav-link">Часто задаваемые вопросы</a></li>
+                        <li><a href="#returns" class="nav-link">Возврат товара</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li>г.Нальчик,ул.Орджоникидзе 172</li>
+                        <li>+7 (992) 555-58-30</li>
+                        <li>msaoev@gmail.ru</li>
+                        <li>Пн-Пт: 9:00-20:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Дачный Рай. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Данные товаров
+        const products = {
+            gardening: [
+                { id: 1, name: "Садовые грабли", price: 1200, image: "https://cdn1.ozone.ru/s3/multimedia-o/6734916024.jpg" },
+                { id: 2, name: "Лопата штыковая", price: 1500, image: "https://avatars.mds.yandex.net/get-mpic/5159039/2a00000197e4491b8780a34c4ea8a9b01460/orig" },
+                { id: 3, name: "Садовые перчатки", price: 350, image: "https://www.letto.ru/upload/iblock/036/8y00f3lu1hc0yos727bvywcvnupo141w/perchatki_poliester_nitril_pokr_print_tsvety_miks_tsv_razm_8_m_fiberon_12.jpg" },
+                { id: 4, name: "Садовый опрыскиватель", price: 2200, image: "https://avatars.mds.yandex.net/i?id=b9410930d5b5ba18e05931cb80d710c3_l-8209285-images-thumbs&n=13" }
+            ],
+            watering: [
+                { id: 5, name: "Шланг садовый 20м", price: 1800, image: "https://avatars.mds.yandex.net/get-mpic/5270077/img_id6288395871582826760.jpeg/9hq" },
+                { id: 6, name: "Система капельного полива", price: 4500, image: "https://cdn1.ozone.ru/s3/multimedia-x/6359507049.jpg" },
+                { id: 7, name: "Дождеватель круговой", price: 1200, image: "https://avatars.mds.yandex.net/get-mpic/1111879/img_id2843111560751558085.jpeg/orig" },
+                { id: 8, name: "Насос для полива", price: 6800, image: "https://avatars.mds.yandex.net/i?id=f2d09ce83bec5d0d6b66da6a3a1d7bd7_l-10869728-images-thumbs&n=13" }
+            ],
+            greenhouses: [
+                { id: 9, name: "Теплица 'Дачная' 3x4м", price: 18500, image: "https://ekb.plastic-system.ru/upload/iblock/c58/c58c74c2cf4cb8981dc1a62f6df6ee1a.jpg" },
+                { id: 10, name: "Парник мини", price: 3500, image: "https://m-strana.ru/upload/iblock/04b/mini-teplitsa-dlya-doma-i-dachi-vidy-konstruktsiy-i-ispolzuemye-materialy-1644863.jpeg" },
+                { id: 11, name: "Теплица арочная 6x3м", price: 24500, image: "https://cs15.pikabu.ru/post_img/2024/09/23/6/og_og_1727082772299824842.jpg" },
+                { id: 12, name: "Каркас парника", price: 4200, image: "https://st12.stpulscen.ru/images/product/603/549/780_original.jpg" }
+            ],
+            tools: [
+                { id: 13, name: "Секатор садовый", price: 850, image: "https://cdn1.ozone.ru/s3/multimedia-1-h/7055331785.jpg" },
+                { id: 14, name: "Сучкорез", price: 2100, image: "https://avatars.mds.yandex.net/get-mpic/1853752/2a0000019277643a6b1574398ab8ffb8d968/orig" },
+                { id: 15, name: "Садовые ножницы", price: 650, image: "https://media.obi.ru/media/catalog/product/4/7/4761789_1_b01d.jpg?store=moscow&image-type=small_image" },
+                { id: 16, name: "Корнеудалитель", price: 1200, image: "https://avatars.mds.yandex.net/get-mpic/4080173/2a000001909937f1399b20db05cb88135e85/orig" }
+            ]
+        };
+
+        // Переменные состояния
+        let currentCategory = 'all';
+        let cart = [];
+        let currentUser = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация карты
+            initMap();
+            
+            // Инициализация навигации
+            initNavigation();
+            
+            // Инициализация категорий
+            initCategories();
+            
+            // Инициализация каталога
+            initCatalog();
+            
+            // Инициализация корзины
+            initCart();
+            
+            // Инициализация системы аутентификации
+            initAuth();
+            
+            // Инициализация FAQ
+            initFAQ();
+        });
+
+        // Инициализация карты
+        function initMap() {
+            const map = L.map('map').setView([43.4853, 43.6073], 13);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            
+            L.marker([43.4853, 43.6073]).addTo(map)
+                .bindPopup('г. Нальчик, ул.Орджоникидзе 172')
+                .openPopup();
+        }
+
+        // Инициализация FAQ
+        function initFAQ() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+        }
+
+        // Инициализация системы аутентификации
+        function initAuth() {
+            const loginBtn = document.getElementById('login-btn');
+            const loginModal = document.getElementById('login-modal');
+            const registerModal = document.getElementById('register-modal');
+            const closeLoginModal = document.getElementById('close-login-modal');
+            const closeRegisterModal = document.getElementById('close-register-modal');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const switchToRegister = document.getElementById('switch-to-register');
+            const switchToLogin = document.getElementById('switch-to-login');
+            const userProfile = document.getElementById('user-profile');
+            const logoutBtn = document.getElementById('logout-btn');
+            const userAvatar = document.getElementById('user-avatar');
+            const userName = document.getElementById('user-name');
+            
+            // Проверка, сохранен ли пользователь в localStorage
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                updateUserUI();
+            }
+            
+            // Открытие модального окна входа
+            if (loginBtn) {
+                loginBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    loginModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            // Переключение на регистрацию
+            if (switchToRegister) {
+                switchToRegister.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    loginModal.classList.remove('active');
+                    registerModal.classList.add('active');
+                });
+            }
+            
+            // Переключение на вход
+            if (switchToLogin) {
+                switchToLogin.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    registerModal.classList.remove('active');
+                    loginModal.classList.add('active');
+                });
+            }
+            
+            // Закрытие модальных окон
+            function closeAllModals() {
+                loginModal.classList.remove('active');
+                registerModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            if (closeLoginModal) {
+                closeLoginModal.addEventListener('click', closeAllModals);
+            }
+            
+            if (closeRegisterModal) {
+                closeRegisterModal.addEventListener('click', closeAllModals);
+            }
+            
+            // Закрытие модальных окон при клике вне их
+            [loginModal, registerModal].forEach(modal => {
+                if (modal) {
+                    modal.addEventListener('click', function(e) {
+                        if (e.target === modal) {
+                            closeAllModals();
+                        }
+                    });
+                }
+            });
+            
+            // Валидация формы
+            function showError(inputId, message) {
+                const errorElement = document.getElementById(inputId + '-error');
+                const inputElement = document.getElementById(inputId);
+                const formGroup = inputElement.closest('.form-group');
+                
+                if (errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.classList.add('show');
+                }
+                
+                if (formGroup) {
+                    formGroup.classList.add('error');
+                    formGroup.classList.remove('success');
+                }
+            }
+            
+            function clearError(inputId) {
+                const errorElement = document.getElementById(inputId + '-error');
+                const inputElement = document.getElementById(inputId);
+                const formGroup = inputElement.closest('.form-group');
+                
+                if (errorElement) {
+                    errorElement.textContent = '';
+                    errorElement.classList.remove('show');
+                }
+                
+                if (formGroup) {
+                    formGroup.classList.remove('error');
+                    formGroup.classList.add('success');
+                }
+            }
+            
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+            
+            // Обработка формы входа
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const email = document.getElementById('login-email').value.trim();
+                    const password = document.getElementById('login-password').value.trim();
+                    const remember = document.getElementById('remember').checked;
+                    
+                    // Валидация
+                    let isValid = true;
+                    
+                    if (!email) {
+                        showError('login-email', 'Введите email');
+                        isValid = false;
+                    } else if (!validateEmail(email)) {
+                        showError('login-email', 'Введите корректный email');
+                        isValid = false;
+                    } else {
+                        clearError('login-email');
+                    }
+                    
+                    if (!password) {
+                        showError('login-password', 'Введите пароль');
+                        isValid = false;
+                    } else if (password.length < 6) {
+                        showError('login-password', 'Пароль должен содержать минимум 6 символов');
+                        isValid = false;
+                    } else {
+                        clearError('login-password');
+                    }
+                    
+                    if (!isValid) return;
+                    
+                    // В реальном приложении здесь был бы запрос к серверу
+                    // Для демонстрации проверяем, существует ли пользователь
+                    const savedUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+                    const existingUser = savedUsers.find(user => user.email === email && user.password === password);
+                    
+                    if (existingUser) {
+                        // Создаем пользователя
+                        const user = {
+                            id: existingUser.id,
+                            name: existingUser.name,
+                            email: existingUser.email,
+                            firstName: existingUser.name.split(' ')[0] || existingUser.name
+                        };
+                        
+                        // Сохраняем пользователя
+                        currentUser = user;
+                        
+                        if (remember) {
+                            localStorage.setItem('currentUser', JSON.stringify(user));
+                        } else {
+                            sessionStorage.setItem('currentUser', JSON.stringify(user));
+                        }
+                        
+                        // Обновляем интерфейс
+                        updateUserUI();
+                        
+                        // Закрываем модальное окно
+                        closeAllModals();
+                        
+                        // Очищаем форму
+                        loginForm.reset();
+                        
+                        // Показываем уведомление
+                        alert(`Добро пожаловать, ${user.firstName}!`);
+                    } else {
+                        // Проверяем, есть ли пользователь с таким email
+                        const userWithEmail = savedUsers.find(user => user.email === email);
+                        if (userWithEmail) {
+                            showError('login-password', 'Неверный пароль');
+                        } else {
+                            showError('login-email', 'Пользователь с таким email не найден');
+                        }
+                    }
+                });
+                
+                // Очистка ошибок при вводе
+                ['login-email', 'login-password'].forEach(inputId => {
+                    const input = document.getElementById(inputId);
+                    if (input) {
+                        input.addEventListener('input', () => {
+                            clearError(inputId);
+                        });
+                    }
+                });
+            }
+            
+            // Обработка формы регистрации
+            if (registerForm) {
+                registerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('register-name').value.trim();
+                    const email = document.getElementById('register-email').value.trim();
+                    const password = document.getElementById('register-password').value.trim();
+                    const confirmPassword = document.getElementById('register-confirm-password').value.trim();
+                    const agreeTerms = document.getElementById('agree-terms').checked;
+                    
+                    // Валидация
+                    let isValid = true;
+                    
+                    if (!name) {
+                        showError('register-name', 'Введите имя');
+                        isValid = false;
+                    } else if (name.length < 2) {
+                        showError('register-name', 'Имя должно содержать минимум 2 символа');
+                        isValid = false;
+                    } else {
+                        clearError('register-name');
+                    }
+                    
+                    if (!email) {
+                        showError('register-email', 'Введите email');
+                        isValid = false;
+                    } else if (!validateEmail(email)) {
+                        showError('register-email', 'Введите корректный email');
+                        isValid = false;
+                    } else {
+                        clearError('register-email');
+                    }
+                    
+                    if (!password) {
+                        showError('register-password', 'Введите пароль');
+                        isValid = false;
+                    } else if (password.length < 6) {
+                        showError('register-password', 'Пароль должен содержать минимум 6 символов');
+                        isValid = false;
+                    } else {
+                        clearError('register-password');
+                    }
+                    
+                    if (!confirmPassword) {
+                        showError('register-confirm-password', 'Подтвердите пароль');
+                        isValid = false;
+                    } else if (password !== confirmPassword) {
+                        showError('register-confirm-password', 'Пароли не совпадают');
+                        isValid = false;
+                    } else {
+                        clearError('register-confirm-password');
+                    }
+                    
+                    if (!agreeTerms) {
+                        alert('Необходимо согласиться с условиями использования');
+                        isValid = false;
+                    }
+                    
+                    if (!isValid) return;
+                    
+                    // Проверяем, нет ли уже пользователя с таким email
+                    const savedUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+                    const existingUser = savedUsers.find(user => user.email === email);
+                    
+                    if (existingUser) {
+                        showError('register-email', 'Пользователь с таким email уже зарегистрирован');
+                        return;
+                    }
+                    
+                    // Создаем нового пользователя
+                    const newUser = {
+                        id: Date.now(), // Простой ID на основе времени
+                        name: name,
+                        email: email,
+                        password: password, // В реальном приложении пароль должен быть хэширован
+                        registrationDate: new Date().toISOString()
+                    };
+                    
+                    // Сохраняем пользователя
+                    savedUsers.push(newUser);
+                    localStorage.setItem('registeredUsers', JSON.stringify(savedUsers));
+                    
+                    // Автоматически входим
+                    currentUser = {
+                        id: newUser.id,
+                        name: newUser.name,
+                        email: newUser.email,
+                        firstName: newUser.name.split(' ')[0] || newUser.name
+                    };
+                    
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    
+                    // Обновляем интерфейс
+                    updateUserUI();
+                    
+                    // Закрываем модальное окно
+                    closeAllModals();
+                    
+                    // Очищаем форму
+                    registerForm.reset();
+                    
+                    // Показываем уведомление
+                    alert(`Регистрация успешна! Добро пожаловать, ${currentUser.firstName}!`);
+                });
+                
+                // Очистка ошибок при вводе
+                ['register-name', 'register-email', 'register-password', 'register-confirm-password'].forEach(inputId => {
+                    const input = document.getElementById(inputId);
+                    if (input) {
+                        input.addEventListener('input', () => {
+                            clearError(inputId);
+                        });
+                    }
+                });
+            }
+            
+            // Выход из системы
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    if (confirm('Вы уверены, что хотите выйти?')) {
+                        currentUser = null;
+                        localStorage.removeItem('currentUser');
+                        sessionStorage.removeItem('currentUser');
+                        updateUserUI();
+                        alert('Вы вышли из системы');
+                    }
+                });
+            }
+            
+            // Функция обновления интерфейса пользователя
+            function updateUserUI() {
+                if (currentUser && userProfile && loginBtn) {
+                    // Показываем профиль пользователя
+                    userProfile.classList.add('active');
+                    loginBtn.style.display = 'none';
+                    
+                    // Обновляем данные пользователя
+                    userAvatar.textContent = currentUser.firstName.charAt(0).toUpperCase();
+                    userName.textContent = currentUser.firstName;
+                } else if (userProfile && loginBtn) {
+                    // Показываем кнопку входа
+                    userProfile.classList.remove('active');
+                    loginBtn.style.display = 'inline-flex';
+                }
+            }
+        }
+
+        // Инициализация навигации
+        function initNavigation() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const nav = document.querySelector('nav');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            
+            // Мобильное меню
+            if (mobileMenu) {
+                mobileMenu.addEventListener('click', function() {
+                    nav.classList.toggle('active');
+                });
+            }
+            
+            // Переключение страниц
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (!href || href === '#login') return;
+                    
+                    const targetId = href.substring(1);
+                    
+                    // Игнорируем клики по кнопке входа (она обрабатывается отдельно)
+                    if (this.id === 'login-btn') return;
+                    
+                    e.preventDefault();
+                    
+                    // Обновление активной ссылки в навигации
+                    navLinks.forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Показ выбранной страницы
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                    });
+                    const targetPage = document.getElementById(targetId);
+                    if (targetPage) {
+                        targetPage.classList.add('active');
+                        targetPage.classList.add('fade-in');
+                        
+                        // Если это страница корзины, обновляем её содержимое
+                        if (targetId === 'cart') {
+                            updateCartPage();
+                        }
+                        
+                        // Прокрутка к верху страницы
+                        window.scrollTo(0, 0);
+                    }
+                    
+                    // Закрытие мобильного меню
+                    if (window.innerWidth <= 480) {
+                        nav.classList.remove('active');
+                    }
+                });
+            });
+        }
+
+        // Инициализация категорий
+        function initCategories() {
+            const categoryCards = document.querySelectorAll('.category-card');
+            
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Переход на страницу каталога с выбранной категорией
+                    const catalogLink = document.querySelector('a[href="#catalog"]');
+                    if (catalogLink) {
+                        // Обновление активной ссылки в навигации
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        catalogLink.classList.add('active');
+                        
+                        // Показ страницы каталога
+                        document.querySelectorAll('.page').forEach(page => {
+                            page.classList.remove('active');
+                        });
+                        document.getElementById('catalog').classList.add('active');
+                        
+                        // Установка фильтра категории
+                        document.getElementById('category-filter').value = category;
+                        currentCategory = category;
+                        
+                        // Обновление товаров в каталоге
+                        updateProducts();
+                        
+                        // Прокрутка к верху страницы
+                        window.scrollTo(0, 0);
+                    }
+                });
+            });
+            
+            // Обработчики для ссылок категорий в футере
+            const categoryLinks = document.querySelectorAll('.category-link');
+            categoryLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const category = this.getAttribute('data-category');
+                    
+                    // Переход на страницу каталога с выбранной категорией
+                    const catalogLink = document.querySelector('a[href="#catalog"]');
+                    if (catalogLink) {
+                        // Обновление активной ссылки в навигации
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        catalogLink.classList.add('active');
+                        
+                        // Показ страницы каталога
+                        document.querySelectorAll('.page').forEach(page => {
+                            page.classList.remove('active');
+                        });
+                        document.getElementById('catalog').classList.add('active');
+                        
+                        // Установка фильтра категории
+                        document.getElementById('category-filter').value = category;
+                        currentCategory = category;
+                        
+                        // Обновление товаров в каталоге
+                        updateProducts();
+                        
+                        // Прокрутка к верху страницы
+                        window.scrollTo(0, 0);
+                    }
+                });
+            });
+        }
+
+        // Инициализация каталога
+        function initCatalog() {
+            const categoryFilter = document.getElementById('category-filter');
+            const priceFilter = document.getElementById('price-filter');
+            const searchInput = document.getElementById('search');
+            
+            // Обработчики фильтров
+            if (categoryFilter) {
+                categoryFilter.addEventListener('change', function() {
+                    currentCategory = this.value;
+                    updateProducts();
+                });
+            }
+            
+            if (priceFilter) {
+                priceFilter.addEventListener('change', updateProducts);
+            }
+            
+            if (searchInput) {
+                searchInput.addEventListener('input', updateProducts);
+            }
+            
+            // Первоначальная загрузка товаров
+            updateProducts();
+        }
+
+        // Обновление отображения товаров
+        function updateProducts() {
+            const productsContainer = document.getElementById('products-container');
+            const priceFilter = document.getElementById('price-filter');
+            const searchInput = document.getElementById('search');
+            
+            if (!productsContainer) return;
+            
+            // Очистка контейнера
+            productsContainer.innerHTML = '';
+            
+            // Получение значений фильтров
+            const priceValue = priceFilter ? priceFilter.value : 'all';
+            const searchValue = searchInput ? searchInput.value.toLowerCase() : '';
+            
+            // Фильтрация товаров
+            let filteredProducts = [];
+            
+            if (currentCategory === 'all') {
+                // Все категории
+                for (const category in products) {
+                    filteredProducts = filteredProducts.concat(products[category]);
+                }
+            } else {
+                // Конкретная категория
+                filteredProducts = products[currentCategory] || [];
+            }
+            
+            // Применение фильтра по цене
+            if (priceValue !== 'all') {
+                filteredProducts = filteredProducts.filter(product => {
+                    switch (priceValue) {
+                        case 'low': return product.price <= 5000;
+                        case 'medium': return product.price > 5000 && product.price <= 15000;
+                        case 'high': return product.price > 15000;
+                        default: return true;
+                    }
+                });
+            }
+            
+            // Применение поиска
+            if (searchValue) {
+                filteredProducts = filteredProducts.filter(product => 
+                    product.name.toLowerCase().includes(searchValue)
+                );
+            }
+            
+            // Отображение товаров
+            if (filteredProducts.length === 0) {
+                productsContainer.innerHTML = '<p class="no-products">Товары не найдены</p>';
+            } else {
+                filteredProducts.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    productCard.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}">
+                        <div class="product-info">
+                            <h3>${product.name}</h3>
+                            <div class="product-price">${product.price.toLocaleString()} руб.</div>
+                            <div class="product-actions">
+                                <button class="btn btn-add-to-cart" data-id="${product.id}">В корзину</button>
+                                <button class="btn btn-outline">Подробнее</button>
+                            </div>
+                        </div>
+                    `;
+                    productsContainer.appendChild(productCard);
+                });
+                
+                // Добавление обработчиков для кнопок "В корзину"
+                const addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
+                addToCartButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const productId = parseInt(this.getAttribute('data-id'));
+                        addToCart(productId);
+                    });
+                });
+            }
+        }
+
+        // Инициализация корзины
+        function initCart() {
+            // Загрузка корзины из localStorage
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCartCount();
+            }
+        }
+
+        // Добавление товара в корзину
+        function addToCart(productId) {
+            // Поиск товара во всех категориях
+            let product = null;
+            for (const category in products) {
+                const foundProduct = products[category].find(p => p.id === productId);
+                if (foundProduct) {
+                    product = foundProduct;
+                    break;
+                }
+            }
+            
+            if (product) {
+                // Проверка, есть ли товар уже в корзине
+                const existingItem = cart.find(item => item.id === productId);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        quantity: 1
+                    });
+                }
+                
+                // Сохранение в localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+                
+                // Обновление счетчика
+                updateCartCount();
+                
+                // Уведомление
+                alert(`Товар "${product.name}" добавлен в корзину!`);
+            }
+        }
+
+        // Обновление счетчика товаров в корзине
+        function updateCartCount() {
+            const cartCount = document.getElementById('cart-count');
+            if (cartCount) {
+                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                cartCount.textContent = totalItems;
+            }
+        }
+
+        // Обновление страницы корзины
+        function updateCartPage() {
+            const cartContent = document.getElementById('cart-content');
+            if (!cartContent) return;
+            
+            if (cart.length === 0) {
+                cartContent.innerHTML = `
+                    <div class="cart-empty">
+                        <p>Ваша корзина пуста</p>
+                        <a href="#catalog" class="btn nav-link">Перейти в каталог</a>
+                    </div>
+                `;
+            } else {
+                let cartHTML = `
+                    <div class="cart-items">
+                        <div class="cart-header">
+                            <h3>Товары в корзине</h3>
+                        </div>
+                `;
+                
+                let total = 0;
+                
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    
+                    cartHTML += `
+                        <div class="cart-item" data-index="${index}">
+                            <img src="${item.image}" alt="${item.name}">
+                            <div class="cart-item-details">
+                                <h3>${item.name}</h3>
+                                <div class="cart-item-price">${item.price.toLocaleString()} руб.</div>
+                            </div>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-minus" data-index="${index}">-</button>
+                                <input type="number" value="${item.quantity}" min="1" class="quantity-input" data-index="${index}">
+                                <button class="quantity-plus" data-index="${index}">+</button>
+                            </div>
+                            <div class="cart-item-total">${itemTotal.toLocaleString()} руб.</div>
+                            <button class="btn-remove remove-item" data-index="${index}">✕</button>
+                        </div>
+                    `;
+                });
+                
+                cartHTML += `
+                    </div>
+                    <div class="cart-summary">
+                        <h3>Итоговая сумма</h3>
+                        <div class="summary-row">
+                            <span>Товары (${cart.reduce((sum, item) => sum + item.quantity, 0)} шт.)</span>
+                            <span>${total.toLocaleString()} руб.</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Доставка</span>
+                            <span>Бесплатно</span>
+                        </div>
+                        <div class="summary-row summary-total">
+                            <span>Итого к оплате:</span>
+                            <span>${total.toLocaleString()} руб.</span>
+                        </div>
+                        <div class="cart-actions">
+                            <button class="btn btn-clear-cart" id="clear-cart">Очистить корзину</button>
+                            <button class="btn btn-checkout" id="checkout">Оформить заказ</button>
+                        </div>
+                    </div>
+                `;
+                
+                cartContent.innerHTML = cartHTML;
+                
+                // Добавляем обработчики событий
+                addCartEventListeners();
+            }
+        }
+
+        // Добавление обработчиков событий для корзины
+        function addCartEventListeners() {
+            // Кнопки изменения количества
+            document.querySelectorAll('.quantity-minus').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    if (cart[index].quantity > 1) {
+                        cart[index].quantity -= 1;
+                        updateCart();
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.quantity-plus').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    cart[index].quantity += 1;
+                    updateCart();
+                });
+            });
+            
+            // Поля ввода количества
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    const newQuantity = parseInt(this.value) || 1;
+                    cart[index].quantity = newQuantity;
+                    updateCart();
+                });
+            });
+            
+            // Кнопки удаления товара
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    if (confirm(`Удалить "${cart[index].name}" из корзины?`)) {
+                        cart.splice(index, 1);
+                        updateCart();
+                    }
+                });
+            });
+            
+            // Кнопка очистки корзины
+            const clearCartBtn = document.getElementById('clear-cart');
+            if (clearCartBtn) {
+                clearCartBtn.addEventListener('click', function() {
+                    if (confirm('Очистить всю корзину?')) {
+                        cart = [];
+                        updateCart();
+                    }
+                });
+            }
+            
+            // Кнопка оформления заказа
+            const checkoutBtn = document.getElementById('checkout');
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', function() {
+                    if (currentUser) {
+                        alert('Заказ успешно оформлен! С вами свяжется менеджер для уточнения деталей.');
+                        cart = [];
+                        updateCart();
+                    } else {
+                        alert('Пожалуйста, войдите в систему для оформления заказа');
+                        document.getElementById('login-btn').click();
+                    }
+                });
+            }
+        }
+
+        // Обновление корзины
+        function updateCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            updateCartPage();
+        }
+    </script>
+</body>
+</html>
